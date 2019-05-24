@@ -75,19 +75,52 @@
 
     // ****** We can reduce/refactor this function further: ******
     // Using a ternary operator, or a shorthand if statement
-    // ? is saying, if the expression before is true, return 1. Or otherwise, return -1
+    // "?" is saying, if the expression before is true, return 1. Or otherwise, return -1
     const sorted_refactor = inventors.sort((a, b) => a.year > b.year ? 1 : -1);
     console.table(sorted_refactor);
 
     // Array.prototype.reduce()
+    // The reduce() method allows you to build something on each item passed in.
+    // Essentially it is declaring a variable and making a for loop.
+    // total is giving you the running total from the last time the function ran.
     // 4. How many years did all the inventors live?
 
-
+    const totalYears = inventors.reduce((total, inventor) => {
+      return total + (inventor.passed - inventor.year);
+    }, 0);
+    console.log(totalYears);
 
     // 5. Sort the inventors by years lived
+      const sortYears = inventors.sort(function(a, b) {
+        const last = a.passed - a.year;
+        const next = b.passed - b.year;
+        return last > next ? -1 : 1;
+      });
+      console.table(sortYears);
+
+    // ****** We can reduce/refactor this function further: ******
+    // Using a ternary operator, or a shorthand if statement
+    const sortYears_refactor = inventors.sort((a, b) => (a.passed - a.year) > (b.passed - b.year) ? -1 : 1);
+    console.table(sortYears_refactor);
+
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
-    // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    // Source: https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+
+    // You can call querySelector against any existing DOM element, not just document.
+    // Could have written the below like: document.querySelector(".mw-category a")
+    // To get the links that way.
+
+    // We are using the spread operator to convert the NodeList returned by querySelectorAll
+    // into an array so that we can then use the .map() function
+
+    const category = document.querySelector('.mw-category');
+    const links = [...category.querySelectorAll('a')];
+
+    const de = links
+                .map(link => link.textContent)
+                .filter(streetName => streetName.includes('de'));
+    console.log(de);
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
