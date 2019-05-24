@@ -114,6 +114,8 @@
     // We are using the spread operator to convert the NodeList returned by querySelectorAll
     // into an array so that we can then use the .map() function
 
+    // Commented out for next exercise
+    /*
     const category = document.querySelector('.mw-category');
     const links = [...category.querySelectorAll('a')];
 
@@ -121,10 +123,31 @@
                 .map(link => link.textContent)
                 .filter(streetName => streetName.includes('de'));
     console.log(de);
+    */
 
     // 7. sort Exercise
-    // Sort the people alphabetically by last name
+    // Sort the people array alphabetically by last name
+    const sortPeople = people.sort((lastOne, nextOne) => {
+      const [aLast, aFirst] = lastOne.split(", ");
+      const [bLast, bFirst] = nextOne.split(", ");
+      return aLast > bLast ? 1 : -1;
+    });
+    console.table(sortPeople);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+    // Start with a blank object, {}, and then every time we loop over, we check to see
+    // if that is an existing entry and if not, we need to add it.
+    // Then we need to increment it.
+    const transportation = data.reduce(function(obj, item) {
+      console.log(item);
+      if (!obj[item]) {
+        obj[item] = 0;
+      }
+      obj[item]++;
+      return obj;
+    }, {}
+    );
+    console.log(transportation);
