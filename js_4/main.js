@@ -39,16 +39,25 @@
 
     // ****** We can reduce/refactor this function further: ******
     // As this returns true or false, we can write it inline.
+    // The filter() method can take in 10 elements and only return 2 (unlike map()).
     // Parentheses around inventor.year are optional but read better to me.
     const fifteen_refactor = inventors.filter(inventor => (inventor.year <= 1599 && inventor.year >= 1500));
     console.table(fifteen_refactor); // 4. Split output into more readable rows in the console.
+    // Returns Galileo and Johannes Kepler.
 
     // List of inventors who passed after 1965.
     const passed_refactor = inventors.filter(inventor => (inventor.passed >= 1965));
     console.table(passed_refactor); // 4. Split output into more readable rows in the console.
+    // Returns Katherine Blodgett(1979) and Lise Meitner(1968).
+
 
     // Array.prototype.map()
-    // 2. Give us an array of the inventors' first and last names
+    // *** NOTE: Remember .map() takes in an array, does stuff to it, and then provides a new array.
+    // *** NOTE: Remember .map() will return the same number of items you give it (unlike filter()).
+    // 2. Give us an array of the inventors' first and last names.
+    // Use back ticks to handle space. Could have used concatenation as well.
+    const fullName = inventors.map(inventor => `${inventor.first} ${inventor.last}`)
+    console.log(fullName);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
