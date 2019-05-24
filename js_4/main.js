@@ -59,11 +59,30 @@
     const fullName = inventors.map(inventor => `${inventor.first} ${inventor.last}`)
     console.log(fullName);
 
+
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    // We are using 1 and -1 to figure out which items to put on top
+    // This is a comparison between two items.
+    const sorted = inventors.sort(function(firstPerson, SecondPerson) {
+      if (firstPerson.year > SecondPerson.year) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
+    console.table(sorted);
+
+    // ****** We can reduce/refactor this function further: ******
+    // Using a ternary operator, or a shorthand if statement
+    // ? is saying, if the expression before is true, return 1. Or otherwise, return -1
+    const sorted_refactor = inventors.sort((a, b) => a.year > b.year ? 1 : -1);
+    console.table(sorted_refactor);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+
+
 
     // 5. Sort the inventors by years lived
 
