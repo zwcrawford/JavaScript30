@@ -6,7 +6,13 @@ const inputs = document.querySelectorAll(".controls input")
 
 // Create the function to update the correct elements.
 function handleUpdate() {
-  const suffix = this.dataset;
+  // This picks up the sizing from the inputs using px but also
+  // grabs an empty string for the color aspect.
+  const suffix = this.dataset.sizing || "";
+  // To grab the variable, start with the document (root)
+  console.log(this.name);
+
+  document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
 }
 
 // Then listen for a change on any of the elements.

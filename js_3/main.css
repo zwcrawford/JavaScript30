@@ -1,7 +1,7 @@
 :root {
-  --base: #ffc600;
+  --base: #00d8fb;
   --spacing: 10px;
-  --blur: 10px;
+  --blur: 0px;
 }
 img {
   padding: var(--spacing);
