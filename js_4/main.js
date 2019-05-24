@@ -1,0 +1,65 @@
+// working with array methods: filter, map, sort, and reduce
+
+// Get your shorts on - this is an array workout!
+    // ## Array Cardio Day 1
+    // An array of objects.
+    const inventors = [
+      { first: 'Albert', last: 'Einstein', year: 1879, passed: 1955 },
+      { first: 'Isaac', last: 'Newton', year: 1643, passed: 1727 },
+      { first: 'Galileo', last: 'Galilei', year: 1564, passed: 1642 },
+      { first: 'Marie', last: 'Curie', year: 1867, passed: 1934 },
+      { first: 'Johannes', last: 'Kepler', year: 1571, passed: 1630 },
+      { first: 'Nicolaus', last: 'Copernicus', year: 1473, passed: 1543 },
+      { first: 'Max', last: 'Planck', year: 1858, passed: 1947 },
+      { first: 'Katherine', last: 'Blodgett', year: 1898, passed: 1979 },
+      { first: 'Ada', last: 'Lovelace', year: 1815, passed: 1852 },
+      { first: 'Sarah E.', last: 'Goode', year: 1855, passed: 1905 },
+      { first: 'Lise', last: 'Meitner', year: 1878, passed: 1968 },
+      { first: 'Hanna', last: 'Hammarström', year: 1829, passed: 1909 }
+    ];
+    const people = ['Beck, Glenn', 'Becker, Carl', 'Beckett, Samuel', 'Beddoes, Mick', 'Beecher, Henry', 'Beethoven, Ludwig', 'Begin, Menachem', 'Belloc, Hilaire', 'Bellow, Saul', 'Benchley, Robert', 'Benenson, Peter', 'Ben-Gurion, David', 'Benjamin, Walter', 'Benn, Tony', 'Bennington, Chester', 'Benson, Leana', 'Bent, Silas', 'Bentsen, Lloyd', 'Berger, Ric', 'Bergman, Ingmar', 'Berio, Luciano', 'Berle, Milton', 'Berlin, Irving', 'Berne, Eric', 'Bernhard, Sandra', 'Berra, Yogi', 'Berry, Halle', 'Berry, Wendell', 'Bethea, Erin', 'Bevan, Aneurin', 'Bevel, Ken', 'Biden, Joseph', 'Bierce, Ambrose', 'Biko, Steve', 'Billings, Josh', 'Biondo, Frank', 'Birrell, Augustine', 'Black, Elk', 'Blair, Robert', 'Blair, Tony', 'Blake, William'];
+
+    // Array.prototype.filter()
+    // Filter the list of inventors for those who were born in the 1500's
+    // 1. Declare a variable and assign it to the array.filter method which accepts a function as an arg.
+    //    The function is going to loop over every item in our array...Albert, Isaac, Galileo...
+    // 2. Once we have all the objects, we can decide if we want to keep them or not with an
+    //    if statement.
+    //    No need to have an else that returns nothing.
+    //    < else {return false} > for example.
+
+    const fifteen = inventors.filter(function(inventor) {
+      if(inventor.year <= 1599 && inventor.year >= 1500)
+      {
+        return true; // 3. We keep this object because it meets our request parameters.
+      }
+    });
+    console.table(fifteen); // 4. Split output into more readable rows in the console.
+    // Returns Galileo and Johannes Kepler.
+
+    // ****** We can reduce/refactor this function further: ******
+    // As this returns true or false, we can write it inline.
+    // Parentheses around inventor.year are optional but read better to me.
+    const fifteen_refactor = inventors.filter(inventor => (inventor.year <= 1599 && inventor.year >= 1500));
+    console.table(fifteen_refactor); // 4. Split output into more readable rows in the console.
+
+    // Array.prototype.map()
+    // 2. Give us an array of the inventors' first and last names
+
+    // Array.prototype.sort()
+    // 3. Sort the inventors by birthdate, oldest to youngest
+
+    // Array.prototype.reduce()
+    // 4. How many years did all the inventors live?
+
+    // 5. Sort the inventors by years lived
+
+    // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
+    // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+
+    // 7. sort Exercise
+    // Sort the people alphabetically by last name
+
+    // 8. Reduce Exercise
+    // Sum up the instances of each of these
+    const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
