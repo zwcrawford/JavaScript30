@@ -43,6 +43,10 @@
     const fifteen_refactor = inventors.filter(inventor => (inventor.year <= 1599 && inventor.year >= 1500));
     console.table(fifteen_refactor); // 4. Split output into more readable rows in the console.
 
+    // List of inventors who passed after 1965.
+    const passed_refactor = inventors.filter(inventor => (inventor.passed >= 1965));
+    console.table(passed_refactor); // 4. Split output into more readable rows in the console.
+
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
 
