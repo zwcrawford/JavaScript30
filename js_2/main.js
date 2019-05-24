@@ -25,5 +25,5 @@ function setDate()
 setInterval(setDate, 1000);
 
 // When the hands get to 90 degrees (12) there is a glitchy reset action
-// that can be temporarily suspended with some if satements inside the setDate
+// that can be temporarily suspended with some if statements inside the setDate
 // function.
