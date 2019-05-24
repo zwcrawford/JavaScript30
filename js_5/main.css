@@ -1,0 +1,93 @@
+html {
+  box-sizing: border-box;
+  background: #ffc600;
+  font-family: 'helvetica neue';
+  font-size: 20px;
+  font-weight: 200;
+}
+body {
+  margin: 0;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+.panels {
+  min-height: 100vh;
+  overflow: hidden;
+  /* 1. just this converts the images from horizontal to vertical. */
+  display: flex;
+}
+.panel {
+  background: #6B0F9C;
+  box-shadow: inset 0 0 0 5px rgba(255,255,255,0.1);
+  color: white;
+  text-align: center;
+  align-items: center;
+  /* Safari transitioned event.propertyName === flex */
+  /* Chrome + FF transitioned event.propertyName === flex-grow */
+  transition:
+    font-size 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+    flex 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+    background 0.2s;
+  font-size: 20px;
+  background-size: cover;
+  background-position: center;
+  /* 2. Each of the images will evenly distribute w/i the available space. */
+  flex: 1;
+  /* 4. justifyContent: center centers text left-to-right */
+  justify-content: center;
+  align-items: center;
+  /* 5. Here is a perfect example of a nested flexbox */
+  /* the flex-container is "panels" and the flex items are "panel" */
+  /* but we are also going to make the "panel" flex items into flex-containers as well. */
+  display: flex;
+  /* 6. Set the flex direction */
+  flex-direction: column;
+}
+.panel1 { background-image:url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500); }
+.panel2 { background-image:url(https://source.unsplash.com/rFKUFzjPYiQ/1500x1500); }
+.panel3 { background-image:url(https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&w=1500&h=1500&fit=crop&s=967e8a713a4e395260793fc8c802901d); }
+.panel4 { background-image:url(https://source.unsplash.com/ITjiVXcwVng/1500x1500); }
+.panel5 { background-image:url(https://source.unsplash.com/3MNzGlQM7qs/1500x1500); }
+/* Flex Children */
+.panel > * {
+  margin: 0;
+  width: 100%;
+  transition: transform 0.5s;
+
+  /* 3. Set a border to better visualize the changes: */
+  /*border: 1px solid red;*/
+
+  /* 7. Set to top right */
+  flex: 1 0 auto;
+  /* 8.  Brings text to the left*/
+  display: flex;
+  /* 9.  With these, everything is now perfectly centered. */
+  justify-content: center;
+  align-items: center;
+}
+/* 10.  Each of the 4 first children are going to be -100%, putting them off-screen ^^*/
+/*      "translateY" */
+.panel > *:first-child { transform: translateY(-100%); }
+/* 12.  Each of the 4 first children are going to be 0%. */
+.panel.open-active > *:first-child { transform: translateY(0); }
+/* 11.  Each of the 4 last children are going to be 100%, putting them off-screen */
+/*      "translateY" */
+.panel > *:last-child { transform: translateY(100%); }
+/* 13.  Each of the 4 first children are going to be 0%. */
+.panel.open-active > *:last-child { transform: translateY(0); }
+
+.panel p {
+  text-transform: uppercase;
+  font-family: 'Amatic SC', cursive;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
+  font-size: 2em;
+}
+.panel p:nth-child(2) {
+  font-size: 4em;
+}
+.panel.open {
+  /* 14.  When open, that one panel will take up 5 times the room of the others. */
+  flex: 5;
+  font-size: 40px;
+}
