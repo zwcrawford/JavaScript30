@@ -38,7 +38,7 @@ console.log({isAdult2});
 /******  Even more refactor. *******/
 // Put what we were setting to currentYear and placing it directly in the function.
 // Remove the brackets and use the implicit return instead.
-const isAdult3 = people.some(person => ((new Date()).getFullYear()) - person.year >= 19 );
+const isAdult3 = people.some(person => ((new Date()).getFullYear()) - person.year >= 19);
 console.log(isAdult3);
 console.log({isAdult3});
 
@@ -46,10 +46,10 @@ console.log({isAdult3});
 // 2. Array.prototype.every()
 // Is EVERYONE 19 or older?
 // .every() will check every item to see if it fits the criteria you provide.
-const allAdults = people.every(person => ((new Date()).getFullYear()) - person.year >= 19 );
+const allAdults = people.every(person => ((new Date()).getFullYear()) - person.year >= 19);
 console.log(allAdults);
 console.log({allAdults});  // Returns false as not every item meets our criteria.
-                           // EVERYONE is not older than 19 as Lux is quite young.
+                           // EVERYONE is not older than 19 as "Lux" is quite young.
 
 
 // 3. Array.prototype.find()
@@ -66,7 +66,30 @@ const comment = comments.find(comment => {
 console.log(comment);
 console.log({comment});
 
+/******  We can refactor this down more. *******/
+// Since 'comment.id === 823423' is going to return a boolean, we don't need an if
+const comment2 = comments.find(comment => comment.id === 823423);
+console.log(comment2);
+console.log({comment2});
 
-// Array.prototype.findIndex()
-// Find the comment with this ID
-// delete the comment with the ID of 823423
+// 4. Array.prototype.findIndex()
+// Find the comment with the ID of 823423.
+const index = comments.findIndex(comment => comment.id === 823423);
+// Returns the index of 1 which is correct.
+console.log({index});
+
+// Delete the comment with the ID of 823423.
+
+// Older way.
+//comments.splice(index,1);
+//console.table({comments});
+
+// In the Redux world, this would be handled by creating a new array.
+// ES6 way with spread operators to pass each item into new array.
+// Remember that "index" is the message with id 823423.
+const newComments = [
+  ...comments.slice(0,index),
+  ...comments.slice(index + 1)
+];
+// In this table you can see that the comment with id 823423 has been removed.
+console.table({newComments});
