@@ -13,9 +13,9 @@ const comments = [
   { text: 'Nice Nice Nice!', id: 542328 }
 ];
 
-
-// 1. Array.prototype.some() // is at least one person 19 or older?
-// Will tell you if at least one thing meets the criteria you specify.
+// 1. Array.prototype.some()
+// Is at least one person 19 or older?
+// .some() will tell you if at least one thing meets the criteria you specify.
 const isAdult = people.some(function(person) {
   const currentYear = (new Date()).getFullYear();
   if(currentYear - person.year >= 19) {
@@ -41,10 +41,32 @@ console.log({isAdult2});
 const isAdult3 = people.some(person => ((new Date()).getFullYear()) - person.year >= 19 );
 console.log(isAdult3);
 console.log({isAdult3});
-// Array.prototype.every() // is everyone 19 or older?
-// Array.prototype.find()
-// Find is like filter, but instead returns just the one you are looking for
+
+
+// 2. Array.prototype.every()
+// Is EVERYONE 19 or older?
+// .every() will check every item to see if it fits the criteria you provide.
+const allAdults = people.every(person => ((new Date()).getFullYear()) - person.year >= 19 );
+console.log(allAdults);
+console.log({allAdults});  // Returns false as not every item meets our criteria.
+                           // EVERYONE is not older than 19 as Lux is quite young.
+
+
+// 3. Array.prototype.find()
 // find the comment with the ID of 823423
+/*
+   Kind of like filter() but instead of returning a subset of the array, it returns the one or, FIRST item that meets the specified criteria. Seems especially useful when dealing
+   with ids or other unique values.
+*/
+const comment = comments.find(comment => {
+   if (comment.id === 823423) {
+    return true;
+   }
+});
+console.log(comment);
+console.log({comment});
+
+
 // Array.prototype.findIndex()
 // Find the comment with this ID
 // delete the comment with the ID of 823423
