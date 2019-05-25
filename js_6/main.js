@@ -27,12 +27,33 @@ function findMatches(wordToMatch, cities) {
       return place.city.match(regex) || place.state.match(regex)
     });
   }
+
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
   function displayMatches() {
-    console.log(this.value);
+    const matchArray = findMatches(this.value, cities);
+    //console.log(matchArray);
+    const html = matchArray.map(place => {
+      const regex = new RegExp(this.value, "gi")
+      const cityName = place.city.replace(regex, `<span class='hl'>${this.value}</span>`);
+      const stateName = place.state.replace(regex, `<span class='hl'>${this.value}</span>`);
+      return `
+        <li>
+          <span class="name">${cityName}, ${stateName}</span>
+          <span class="name">${numberWithCommas(place.population)}</span>
+        </li>
+        `;
+    // This will return an array so with the .join() here at the end, it makes it suck less.
+    }).join("");
+    suggestions.innerHTML = html;
   }
 
   const searchInput = document.querySelector(".search");
   const suggestions = document.querySelector(".suggestions");
 
+  // This is working for change - when a user clicks out
+  // But also for a keyup - every time they type, it is searching.
   searchInput.addEventListener("change", displayMatches);
   searchInput.addEventListener("keyup", displayMatches);
