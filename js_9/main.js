@@ -1,4 +1,3 @@
-const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
     function makeGreen() {
       const p = document.querySelector('p');
       p.style.color = '#BADA55';
@@ -57,14 +56,72 @@ const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
     // true.
     console.assert(1 === 1, "That's wrong");
     // However, since the one p tag on our index.html page does not have a class of
-    // "title", It returns this error message, "That's wrong".
+    // "title", It returns this error message, "Assertion failed: That's wrong".
     const p = document.querySelector("p");
     console.assert(p.classList.contains("title"), "That's wrong");
 
-    // Clearing
-
+    // Clearing the console
+    //console.clear();
 
     // Viewing DOM Elements
+    // Will return the entire p tag element in the console.
+    // <p onclick="makeGreen()">×BREAK×DOWN×</p>
+    console.log(p);
+
+    // This will log the dropdown with all its properties and methods.
+    console.dir(p);
+
+
     // Grouping together
-    // counting
-    // timing
+    const dogs = [{ name: 'Scout', age: 2 }, { name: 'Luna', age: 1 }];
+    // Looping over the dog array above.
+    // Each output is grouped by dog now.
+    dogs.forEach(dog => {
+      // Create a console group
+      console.group(`${dog.name}`);
+      console.log(`This is ${dog.name}.`);
+      console.log(`${dog.name} is ${dog.age}.`);
+      console.log(`${dog.name} is ${dog.age * 7} dog years old.`);
+      // End the console group here.
+      console.groupEnd(`${dog.name}`)
+    })
+
+    // This version provides the same grouping but the groups are collapsed by ////
+    // default. Nice for several results.
+    dogs.forEach(dog => {
+      // Create a collapsed console group
+      console.groupCollapsed(`${dog.name}`);
+      console.log(`This is ${dog.name}.`);
+      console.log(`${dog.name} is ${dog.age}.`);
+      console.log(`${dog.name} is ${dog.age * 7} dog years old.`);
+      // End the console group here.
+      console.groupEnd(`${dog.name}`)
+    })
+
+    // Counting
+    // Will give you a count of what is passed
+    console.count("Luna");
+    console.count("Scout");
+    console.count("Luna");
+    console.count("Luna");
+    console.count("Luna");
+    /*
+      Output is as follows:
+
+      Luna: 1
+      Scout: 1
+      Luna: 2
+      Luna: 3
+      Luna: 4
+    */
+
+    // Timing
+    console.time("fetching data");
+    fetch("https://api.github.com/users/zwcrawford")
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd("fetching data");
+        console.log(data);
+      })
+    // Response : fetching data: 94.701904296875ms
+    // Returned data as well
