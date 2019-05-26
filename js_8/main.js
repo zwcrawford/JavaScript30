@@ -19,6 +19,13 @@ canvas.height = window.innerHeight;
 ctx.strokeStyle = "#BADA55";
 ctx.lineJoin = "round";
 ctx.lineCap = "round";
+// Change the width of the line:
+ctx.lineWidth = 50;
+
+// Using blend modes inside context with globalCompositeOperation.
+// Can play with this to determine what happens when the lines overlap.
+// ctx.globalCompositeOperation = 'multiply';
+
 
 /*
    Next we need some dummy variables.
@@ -38,13 +45,23 @@ let isDrawing = false;
 */
 let lastX = 0;
 let lastY = 0;
-
+// Selecting the colors to show when drawing.
+let hue = 0;
+// Create another variable here which will allow it to build up
+let direction = true;
 // Need a function that takes an event and will be called whenever we move the
 // cursor across the canvas.
 function draw(e) {
   // Listen for the mouse-over event on the canvas. Console log shows all the movements.
   if (!isDrawing) return; // This stops the function from running when not pressing down.
   console.log(e)
+  // Setting the color: Hue = ${hue}, with 100% saturation and 50% lightness.
+  // We will increment hue at the end of this function.
+  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+
+  // Delete this as we are handling line width
+  //ctx.lineWidth = hue;
+
   ctx.beginPath();
   // Need to give start and endpoints
   // Start from:
@@ -62,6 +79,24 @@ function draw(e) {
   // With ES6, we can do this with one line:
   // This is called destructuring an array.
   [lastX, lastY] = [e.offsetX, e.offsetY];
+  // This increments the colors that show in a drawn line.
+  hue++;
+  // Reset the hue value instead of incrementing over continuously
+  if (hue >= 360) {
+    hue = 0;
+  }
+  // Here we are going to increment the lineWidth
+  if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
+    // We want to flip the direction
+    direction = !direction;
+  }
+  if (direction) {
+    // Increment from 0 to 100
+    ctx.lineWidth++;
+  } else {
+    // Decrement from 100 to 0
+    ctx.lineWidth--;
+  }
 };
 
 // When mouse is down, run a quick arrow function inline.
