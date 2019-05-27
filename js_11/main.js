@@ -7,7 +7,7 @@ const video = player.querySelector(".viewer");
 const progress = player.querySelector(".progress");
 const progressBar = player.querySelector(".progress__filled");
 const toggle = player.querySelector(".toggle");
-const skipButtons = player.querySelector("[data-skip]");
+const skipButtons = player.querySelectorAll("[data-skip]");
 const ranges = player.querySelector(".player__slider");
 
 // 2. Build functions
@@ -48,6 +48,10 @@ function updateButton() {
   toggle.textContent = icon;
   //console.log("Update the button");
 }
+// This is working with the data-skip attribute on the button.
+function skip() {
+  console.log("skipping");
+}
 // 3. Attach event listeners
 
 // This enables clicking the screen to play or pause.
@@ -68,3 +72,5 @@ toggle.addEventListener("click", togglePlay);
    when it is paused...no matter what caused it to pause.
    This allows us to only focus on the buttons changing.
 */
+// Skip and rewind buttons
+skipButtons.forEach(button => button.addEventListener("click", skip));
