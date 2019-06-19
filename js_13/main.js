@@ -1,4 +1,3 @@
-
 // This function will reduce the amount of times the event below will happen.
 /*
   The program will run debounce when we scroll but will only run checkSlide
@@ -34,9 +33,24 @@ function checkSlide(e) {
   // Want the pics to animate when the scroll action has revealed over 50% of the height of the image.
   sliderImages.forEach(sliderImage => {
     // Gives us the pixel level at which each image should slide in. Divide by 2 for
-    // 50% of height.
+    // 50% of height or halfway point of the image.
     const slideInAt = (window.scrollY + window.innerHeight) - sliderImage.height / 2;
-    console.log(slideInAt)
+    // Test
+    //console.log(slideInAt)
+
+    // Now we need to find the bottom of the image so the image can move itself back out.
+    // Also, if the user is scrolling up, the effect will be the same.
+    const imageBottom = sliderImage.offsetTop + sliderImage.height;
+    const isHalfShown = slideInAt > sliderImage.offsetTop;
+    const isNotScrolledPast = window.scrollY < imageBottom;
+
+    // If the image is half shown and we have not scrolled past it.
+    if (isHalfShown && isNotScrolledPast) {
+      // Take the image and add the class.
+      sliderImage.classList.add("active");
+    } else {
+      sliderImage.classList.remove("active");
+    }
   });
 }
 // Calls checkSlide when user scrolls.
