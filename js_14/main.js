@@ -91,13 +91,43 @@ console.log(person);
       // Object.assign({}, person);
 
 // Next, you will fold in the properties you wish to overwrite.
-      // Object.assign({}, person, {age: 31});
+// Object.assign({}, person, {age: 31, custId: 202, orderNo: 38TR90900, etc.});
 
 // Lastly, assign it to your own variable
 const copycat = Object.assign({}, person, {age: 31});
 console.log(copycat);  // Prints {name: "Clara", age: 31}
 console.log(person);  // Prints {name: "Clara", age: 11}
 
-    // We will hopefully soon see the object ...spread
+// We will hopefully soon see the object ...spread
+// New in ECMAScript 2018 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
+const cap3 = {...copycat};
+console.log(cap3);
 
-    // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+// #4
+const user1 = {
+  name: "Kelly",
+  age: "32",
+  social: {
+    twitter: "@KelKel",
+    reddit: "u/kel_kel"
+  }
+};
+console.log(user1);
+// Copy user1 obj.
+const copyUser1 = Object.assign({}, user1);
+console.log(copyUser1);
+copyUser1.social.twitter = "@coolguy";
+
+// ***** POOR MAN'S DEEP CLONE OF AN OBJECT *****
+
+// This is a copy and not a reference to user1
+// Stringify makes an object a string and then it is immediately converted back to an obj.
+const stringAndBack = JSON.parse(JSON.stringify(user1));
+console.log(stringAndBack);
+
+// JSON.stringify helps print the object to the console.
+// If you need a string, console.log(cap3.toString()); only prints out [object Object].
+// Use this instead:
+console.log(`This is an object spread: ${JSON.stringify(cap3, null, 2)}`);
+
+// Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
